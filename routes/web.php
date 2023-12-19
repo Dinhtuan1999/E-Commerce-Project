@@ -20,14 +20,14 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home');
-});
+})->name('home');
 
 Route::prefix('admin')->group(function () {
 
     Route::prefix('categories')->group(function () {
         Route::get('/index',[CategoryController::class, 'index'])->name('categories.index');
         Route::get('/create',[CategoryController::class, 'create'])->name('categories.create');
-        Route::get('/store',[CategoryController::class, 'store'])->name('categories.store');
+        Route::post('/store',[CategoryController::class, 'store'])->name('categories.store');
         Route::get('/edit',[CategoryController::class, 'edit'])->name('categories.edit');
         Route::get('/update',[CategoryController::class, 'update'])->name('categories.update');
         Route::get('/delete',[CategoryController::class, 'delete'])->name('categories.delete');
