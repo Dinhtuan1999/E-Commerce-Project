@@ -1,21 +1,16 @@
 
 @extends('admin.layouts.admin')
- 
+
 @section('title')
- 
+
   <title>Trang chu</title>
 @endsection
- 
+
 @section('content')
 
- <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   @include('admin.partials.content-header',['name'=> 'Category', 'key'=> 'List'])
 
-  <!-- /.content-header -->
-
-  <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -26,42 +21,31 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">STT</th>
+                <th scope="col">Tên Danh Mục</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+                @foreach ($categories as $key => $category)
+                <tr>
+                    <td>{{++$key }}</td>
+                    <td>{{ $category->name  }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="{{ route('categories.edit',['id' => $category->id]) }}">Edit</a>
+                        <a class="btn btn-danger" href="{{ route('categories.delete',['id' => $category->id]) }}">Delete</a>
+                    </td>
+                  </tr>
+                @endforeach
             </tbody>
           </table>
         </div>
-        
+        <div class="col-md-12">
+            {!! $categories->withQueryString()->links('pagination::bootstrap-5') !!}
+        </div>
 
-        <!-- /.col-md-6 -->
       </div>
-      <!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div>
   </div>
-  <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
 @endsection

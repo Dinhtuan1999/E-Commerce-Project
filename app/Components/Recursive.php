@@ -1,6 +1,6 @@
-<?php 
+<?php
 namespace App\Components;
- 
+
 class Recursive {
     private $data;
     private $htmlOption = '';
@@ -9,11 +9,15 @@ class Recursive {
         $this->data = $data;
     }
 
-    public function categoryRecursive($id = 0, $text = ''){
+    public function categoryRecursive($parentId, $id = 0, $text = ''){
         foreach($this->data as $value){
             if($value['parent_id'] == $id){
-                $this->htmlOption .= "<option value='".$value['id']."'>".$text.$value['name']."</option>";
-                $this->categoryRecursive($value['id'], $text . '--');
+                if(!empty($parentId) && $parentId == $value['id'] ){
+                    $this->htmlOption .= "<option selected value='".$value['id']."'>".$text.$value['name']."</option>";
+                }else{
+                    $this->htmlOption .= "<option value='".$value['id']."'>".$text.$value['name']."</option>";
+                }
+                $this->categoryRecursive($parentId, $value['id'], $text . '--');
             }
         }
 
