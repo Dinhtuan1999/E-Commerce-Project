@@ -25,6 +25,7 @@
         </div>
       </div>
 
+        <!-- Start Category -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -38,7 +39,10 @@
           </li>
         </ul>
       </nav>
+        <!-- End Category -->
 
+
+        <!-- Start Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -51,5 +55,23 @@
           </li>
         </ul>
       </nav>
+        <!-- End Menu -->
+
+           <!-- Start Product -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="{{route('products.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Sản Phẩm
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+        <!-- End Product -->
+
+
     </div>
   </aside>
