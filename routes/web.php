@@ -57,10 +57,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}',[ProductController::class, 'edit'])->name('products.edit');
         Route::post('/update/{id}',[ProductController::class, 'update'])->name('products.update');
         Route::get('/delete/{id}',[ProductController::class, 'delete'])->name('products.delete');
+        Route::post('ckeditor/upload', [ProductController::class, 'uploadImage'])->name('products.ckeditor.upload');
 
     });
 
-    
+
     Route::prefix('menus')->group(function () {
         Route::get('/index',[MenuController::class, 'index'])->name('menus.index');
         Route::get('/create',[MenuController::class, 'create'])->name('menus.create');

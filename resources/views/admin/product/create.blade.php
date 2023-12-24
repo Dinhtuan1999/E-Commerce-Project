@@ -5,8 +5,9 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('admin/library/select2/select2.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('admin/product/product.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admins/library/select2/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admins/product/css/product_create.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admins/library/ckeditor/ckeditor.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -44,14 +45,14 @@
 
                             <div class="form-group">
                                 <label>Tag</label>
-                                <select class="form-control tag_select_choose" multiple="multiple" name="tag[]">
+                                <select class="form-control tag_select_choose" multiple="multiple" name="tags[]">
 
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label>Chọn Danh Mục</label>
-                                <select class="form-control category_select_choose" name="parent_id">
+                                <select class="form-control category_select_choose" name="category_id">
                                     <option value="">Chọn làm menu cha</option>
                                     {!! $htmlOption !!}
                                 </select>
@@ -62,7 +63,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Mô tả sản phẩm</label>
-                                <textarea class="form-control ckeditor_init" rows="8" name="content"></textarea>
+                                <textarea class="form-control ckeditor_init" rows="10" name="content"></textarea>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -79,9 +80,27 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('admin/library/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
-    <script src="{{ asset('admin/library/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('admin/product/product.js') }}"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    <script src="{{ asset('admins/library/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+    <script src="{{ asset('admins/library/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('admins/product/js/product_create.js') }}"></script>
+    <script src="{{ asset('admins/library/ckeditor/ckeditor.js') }}"></script>
 
+    <script>
+        ClassicEditor
+            .create(document.querySelector('.ckeditor_init'), {
+                ckfinder: {
+                    uploadUrl: '{{route('products.ckeditor.upload').'?_token='.csrf_token()}}',
+                }
+            }, {
+                alignment: {
+                    options: ['right', 'right']
+                }
+            })
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    </script>
 @endsection

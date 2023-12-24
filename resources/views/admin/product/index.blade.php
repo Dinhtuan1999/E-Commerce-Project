@@ -6,6 +6,10 @@
   <title>Trang chu</title>
 @endsection
 
+@section('css')
+    <link href="{{ asset('admins/product/css/product_list.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
 
  <div class="content-wrapper">
@@ -36,8 +40,10 @@
                     <td>{{++$key }}</td>
                     <td>{{ $product->name  }}</td>
                     <td>{{ $product->price  }}</td>
-                    <td>{{ $product->feature_image_path  }}</td>
-                    <td>{{ $product->categori_id  }}</td>
+                    <td>
+                        <img class="product_image" src="{{ $product->feature_image_path  }}" alt="">
+                    </td>
+                    <td>{{ $product->category->name  }}</td>
                     <td>
                         <a class="btn btn-warning" href="{{ route('products.edit',['id' => $product->id]) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ route('products.delete',['id' => $product->id]) }}">Delete</a>

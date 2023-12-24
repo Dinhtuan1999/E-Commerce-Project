@@ -1,7 +1,7 @@
 $(function(){
     $(".tag_select_choose").select2({
         tags: true,
-        tokenSeparators: [',', ' ']
+        tokenSeparators: [',']
     })
 
     $(".category_select_choose").select2({
@@ -9,11 +9,6 @@ $(function(){
         allowClear: true
     })
 
-    ClassicEditor
-    .create(document.querySelector('.ckeditor_init'))
-    .catch(error => {
-        console.error(error);
-    });
 
 })
 
