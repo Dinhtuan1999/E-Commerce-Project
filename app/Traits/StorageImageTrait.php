@@ -30,7 +30,7 @@ trait  StorageImageTrait{
             $filePath = $file->storeAs('public/'.$folderName.'/'.auth()->id(), $fileNameHash);
             $dataUPloadFileTrait = [
                 'file_name' => $fileNameOrigin,
-                'file_path' => $filePath,
+                'file_path' => Storage::url($filePath),
             ];
 
             return $dataUPloadFileTrait;

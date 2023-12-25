@@ -35,7 +35,7 @@
             </thead>
             <tbody>
 
-                @foreach ($products as $key => $product)
+                @foreach (@$products as $key => $product)
                 <tr>
                     <td>{{++$key }}</td>
                     <td>{{ $product->name  }}</td>
@@ -43,7 +43,7 @@
                     <td>
                         <img class="product_image" src="{{ $product->feature_image_path  }}" alt="">
                     </td>
-                    <td>{{ $product->category->name  }}</td>
+                    <td>{{ optional($product->category)->name }}</td>
                     <td>
                         <a class="btn btn-warning" href="{{ route('products.edit',['id' => $product->id]) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ route('products.delete',['id' => $product->id]) }}">Delete</a>

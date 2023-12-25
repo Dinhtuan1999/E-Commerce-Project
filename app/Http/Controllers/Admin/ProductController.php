@@ -100,9 +100,12 @@ class ProductController extends Controller
 
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $product = $this->product->find($id);
+        $htmlOption = $this->getCategory($product->category_id);
 
+        return view('admin.product.edit',['htmlOption'=> $htmlOption, 'product' => $product]);
     }
 
     public function update()
