@@ -14,7 +14,7 @@
 @section('content')
     <div class="content-wrapper">
         @include('admin.partials.content-header', ['name' => 'Product', 'key' => 'Edit'])
-        <form action="{{ route('products.create') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('products.update',['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="content">
@@ -50,7 +50,6 @@
                             <div class="form-group">
                                 <label>Ảnh Chi Tiết</label>
                                 <input type="file" class="form-control-file" name="image_path[]" multiple>
-
                                 <div class="col-md-12 container_image_detail">
                                     <div class="row">
                                         @foreach ($product->productImages as $productImage)
@@ -69,7 +68,7 @@
                                 <label>Tag</label>
                                 <select class="form-control tag_select_choose" multiple="multiple" name="tags[]">
                                     @foreach ($product->productTags as $productTag)
-                                        <option value="{{ $productTag->id }}" selected>{{ $productTag->name }}</option>
+                                        <option value="{{ $productTag->name }}" selected>{{ $productTag->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

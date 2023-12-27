@@ -33,10 +33,10 @@
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
 
                 @foreach (@$products as $key => $product)
-                <tr>
+                <tr id="tr">
                     <td>{{++$key }}</td>
                     <td>{{ $product->name  }}</td>
                     <td>{{ $product->price  }}</td>
@@ -46,7 +46,7 @@
                     <td>{{ optional($product->category)->name }}</td>
                     <td>
                         <a class="btn btn-warning" href="{{ route('products.edit',['id' => $product->id]) }}">Edit</a>
-                        <a class="btn btn-danger" href="{{ route('products.delete',['id' => $product->id]) }}">Delete</a>
+                        <a class="btn btn-danger action_delete" href="" data-url="{{ route('products.delete',['id' => $product->id]) }}">Delete</a>
                     </td>
                   </tr>
                 @endforeach
@@ -61,4 +61,10 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('admins/product/js/product_list.js') }}"></script>
+
 @endsection
