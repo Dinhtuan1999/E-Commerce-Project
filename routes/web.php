@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,13 +63,14 @@ Route::prefix('admin')->group(function () {
     });
 
 
-    Route::prefix('menus')->group(function () {
-        Route::get('/index',[MenuController::class, 'index'])->name('menus.index');
-        Route::get('/create',[MenuController::class, 'create'])->name('menus.create');
-        Route::post('/store',[MenuController::class, 'store'])->name('menus.store');
-        Route::get('/edit/{id}',[MenuController::class, 'edit'])->name('menus.edit');
-        Route::post('/update/{id}',[MenuController::class, 'update'])->name('menus.update');
-        Route::get('/delete/{id}',[MenuController::class, 'delete'])->name('menus.delete');
+    Route::prefix('sliders')->group(function () {
+        Route::get('/index',[SliderController::class, 'index'])->name('sliders.index');
+        Route::get('/create',[SliderController::class, 'create'])->name('sliders.create');
+        Route::post('/store',[SliderController::class, 'store'])->name('sliders.store');
+        Route::get('/edit/{id}',[SliderController::class, 'edit'])->name('sliders.edit');
+        Route::post('/update/{id}',[SliderController::class, 'update'])->name('sliders.update');
+        Route::get('/delete/{id}',[SliderController::class, 'delete'])->name('sliders.delete');
+        Route::post('ckeditor/upload', [ProductController::class, 'uploadImage'])->name('sliders.ckeditor.upload');
 
     });
 

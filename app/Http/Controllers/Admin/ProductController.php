@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
 use App\Components\Recursive;
+use App\Http\Requests\ProductRequest;
 use App\Models\ProductImage;
 use App\Models\Tag;
 use Illuminate\Http\JsonResponse;
@@ -37,7 +38,6 @@ class ProductController extends Controller
         $products = $this->product->latest()->paginate(5);
 
         return view("admin.product.index", ['products' => $products])->render();
-
     }
 
     public function create()
@@ -45,10 +45,9 @@ class ProductController extends Controller
 
         $htmlOption = $this->getCategory($parentId = '');
         return view('admin.product.create', ['htmlOption' => $htmlOption]);
-
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
 
         try {
@@ -90,7 +89,6 @@ class ProductController extends Controller
                     ]);
 
                     $tagIds[] = $tag->id;
-
                 }
                 $product->productTags()->attach($tagIds);
             }
@@ -101,7 +99,6 @@ class ProductController extends Controller
             DB::rollBack();
             Log::error("message :" . $exception->getMessage() . '-' . 'line:' . $exception->getLine());
         }
-
     }
 
     public function edit($id)
@@ -109,10 +106,10 @@ class ProductController extends Controller
         $product = $this->product->find($id);
         $htmlOption = $this->getCategory($product->category_id);
 
-        return view('admin.product.edit',['htmlOption'=> $htmlOption, 'product' => $product]);
+        return view('admin.product.edit', ['htmlOption' => $htmlOption, 'product' => $product]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         try {
             DB::beginTransaction();
@@ -157,7 +154,6 @@ class ProductController extends Controller
                     ]);
 
                     $tagIds[] = $tag->id;
-
                 }
                 $product->productTags()->sync($tagIds);
             }
@@ -172,21 +168,21 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-       try{
+        try {
             $this->product->find($id)->delete();
 
             return response()->json([
                 'code' => 200,
                 'message' => 'success'
             ], 200);
-       } catch (\Exception $exception) {
-        Log::error("message :" . $exception->getMessage() . '-' . 'line:' . $exception->getLine());
+        } catch (\Exception $exception) {
+            Log::error("message :" . $exception->getMessage() . '-' . 'line:' . $exception->getLine());
 
-        return response()->json([
-            'code' => 500,
-            'message' => 'error'
-        ], 500);
-    }
+            return response()->json([
+                'code' => 500,
+                'message' => 'error'
+            ], 500);
+        }
     }
 
     public function getCategory($parentId)
@@ -213,5 +209,4 @@ class ProductController extends Controller
             return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
         }
     }
-
 }

@@ -20,50 +20,108 @@
                 <div class="container-fluid">
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
 
-                            <div class="form-group">
-                                <label>Tên sản phẩm</label>
-                                <input type="text" class="form-control" placeholder="Nhập Tên Sản Phẩm"
-                                    name="product_name">
+                            <div class="form-group row">
+                                <label class="col-md-2">Tên sản phẩm</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control @error('product_name') is-invalid @enderror"
+                                        placeholder="Nhập Tên Sản Phẩm" name="product_name" value="{{ old('product_name') }}">
+                                    @error('product_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{!! $message !!}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Giá</label>
-                                <input type="text" class="form-control" placeholder="Nhập Giá Sản Phẩm" name="price">
+                            <div class="form-group row">
+                                <label class="col-md-2">Giá</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control  @error('price') is-invalid @enderror"
+                                        placeholder="Nhập Giá Sản Phẩm" name="price" value="{{ old('price') }}">
+                                    @error('price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{!! $message !!}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Ảnh Chính</label>
-                                <input type="file" class="form-control-file" name="feature_image_path">
+                            <div class="form-group row">
+                                <label class="col-md-2">Ảnh Chính</label>
+                                <div class="col-md-6">
+                                    <input type="file"
+                                        class="form-control-file  @error('feature_image_path') is-invalid @enderror"
+                                        name="feature_image_path">
+                                    @error('feature_image_path')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{!! $message !!}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Ảnh Chi Tiết</label>
-                                <input type="file" class="form-control-file" name="image_path[]" multiple>
+                            <div class="form-group row">
+                                <label class="col-md-2">Ảnh Chi Tiết</label>
+                                <div class="col-md-6">
+                                    <input type="file"
+                                        class="form-control-file @error('image_path') is-invalid @enderror"
+                                        name="image_path[]" multiple>
+                                    @error('image_path')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{!! $message !!}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Tag</label>
-                                <select class="form-control tag_select_choose" multiple="multiple" name="tags[]">
-
-                                </select>
+                            <div class="form-group row">
+                                <label class="col-md-2">Tag</label>
+                                <div class="col-md-6">
+                                    <select class="form-control tag_select_choose @error('tags') is-invalid @enderror"
+                                        multiple="multiple" name="tags[]">
+                                    </select>
+                                    @error('tags')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{!! $message !!}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Chọn Danh Mục</label>
-                                <select class="form-control category_select_choose" name="category_id">
-                                    <option value="">Chọn làm menu cha</option>
-                                    {!! $htmlOption !!}
-                                </select>
+                            <div class="form-group row">
+                                <label class="col-md-2">Chọn Danh Mục</label>
+                                <div class="col-md-6">
+                                    <select
+                                        class="form-control category_select_choose @error('category_id') is-invalid @enderror"
+                                        name="category_id">
+                                        <option value="">Chọn làm menu cha</option>
+                                        {!! $htmlOption !!}
+                                    </select>
+                                    @error('category_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{!! $message !!}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
 
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Mô tả sản phẩm</label>
-                                <textarea class="form-control ckeditor_init" rows="10" name="content"></textarea>
+                        <div class="col-md-12 ">
+                            <div class="form-group row">
+                                <label class="col-md-2">Mô tả sản phẩm</label>
+                                <div class="col md-9">
+                                    <textarea class="form-control ckeditor_init  @error('content') is-invalid @enderror" rows="10" name="content">{{ old('content') }}</textarea>
+                                    @error('content')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{!! $message !!}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -89,7 +147,7 @@
         ClassicEditor
             .create(document.querySelector('.ckeditor_init'), {
                 ckfinder: {
-                    uploadUrl: '{{route('products.ckeditor.upload').'?_token='.csrf_token()}}',
+                    uploadUrl: '{{ route('products.ckeditor.upload') . '?_token=' . csrf_token() }}',
                 }
             }, {
                 alignment: {
