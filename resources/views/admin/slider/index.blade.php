@@ -67,5 +67,6 @@
 @section('js')
 <script src="{{ asset('admins/library/sweetalert2/sweetalert2@11.js') }}"></script>
 <script src="{{ asset('admins/slider/js/slider_list.js') }}"></script>
+<script src="{{ asset('admins/js/main.js') }}"></script>
 
 @endsection

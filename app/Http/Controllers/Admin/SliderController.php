@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SliderRequest;
 use App\Models\Slider;
+use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,8 @@ use App\Traits\StorageImageTrait;
 class SliderController extends Controller
 {
 
-    use StorageImageTrait;
+    use StorageImageTrait, DeleteModelTrait;
+
     private $slider;
     public function __construct(Slider $slider)
     {
@@ -92,21 +94,24 @@ class SliderController extends Controller
 
     public function delete($id)
     {
-        try {
-            $this->slider->find($id)->delete();
+        // try {
+        //     $this->slider->find($id)->delete();
 
-            return response()->json([
-                'code' => 200,
-                'message' => 'success'
-            ], 200);
-        } catch (\Exception $exception) {
-            Log::error("message :" . $exception->getMessage() . '-' . 'line:' . $exception->getLine());
+        //     return response()->json([
+        //         'code' => 200,
+        //         'message' => 'success'
+        //     ], 200);
+        // } catch (\Exception $exception) {
+        //     Log::error("message :" . $exception->getMessage() . '-' . 'line:' . $exception->getLine());
 
-            return response()->json([
-                'code' => 500,
-                'message' => 'error'
-            ], 500);
-        }
+        //     return response()->json([
+        //         'code' => 500,
+        //         'message' => 'error'
+        //     ], 500);
+        // }
+
+        return $this->deleteModelTrait($id, $this->slider);
+
     }
 
     public function uploadImages(Request $request)

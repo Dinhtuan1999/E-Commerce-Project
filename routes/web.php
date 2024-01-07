@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -62,7 +63,7 @@ Route::prefix('admin')->group(function () {
 
     });
 
-
+    //slider
     Route::prefix('sliders')->group(function () {
         Route::get('/index',[SliderController::class, 'index'])->name('sliders.index');
         Route::get('/create',[SliderController::class, 'create'])->name('sliders.create');
@@ -74,13 +75,14 @@ Route::prefix('admin')->group(function () {
 
     });
 
-    Route::prefix('menus')->group(function () {
-        Route::get('/index',[MenuController::class, 'index'])->name('menus.index');
-        Route::get('/create',[MenuController::class, 'create'])->name('menus.create');
-        Route::post('/store',[MenuController::class, 'store'])->name('menus.store');
-        Route::get('/edit/{id}',[MenuController::class, 'edit'])->name('menus.edit');
-        Route::post('/update/{id}',[MenuController::class, 'update'])->name('menus.update');
-        Route::get('/delete/{id}',[MenuController::class, 'delete'])->name('menus.delete');
+    //setting
+    Route::prefix('settings')->group(function () {
+        Route::get('/index',[SettingController::class, 'index'])->name('settings.index');
+        Route::get('/create',[SettingController::class, 'create'])->name('settings.create');
+        Route::post('/store',[SettingController::class, 'store'])->name('settings.store');
+        Route::get('/edit/{id}',[SettingController::class, 'edit'])->name('settings.edit');
+        Route::post('/update/{id}',[SettingController::class, 'update'])->name('settings.update');
+        Route::get('/delete/{id}',[SettingController::class, 'delete'])->name('settings.delete');
 
     });
 
